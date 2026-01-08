@@ -1,0 +1,6 @@
+@OrionOps.Api_HostAddress = http://localhost:5028
+
+GET {{OrionOps.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
