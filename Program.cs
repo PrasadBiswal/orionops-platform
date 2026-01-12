@@ -1,9 +1,24 @@
+using Microsoft.EntityFrameworkCore;
+using OrionOps.Application.Interfaces;
+using OrionOps.Application.Services;
+using OrionOps.Infrastructure.Data;
+using OrionOps.Infrastructure.Repositories;
+
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<OrionOpsDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<ITenantRepository, TenantRepository>();
+builder.Services.AddScoped<ITenantService, TenantService>();
+
 
 var app = builder.Build();
 
